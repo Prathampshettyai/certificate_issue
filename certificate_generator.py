@@ -7,10 +7,10 @@ from reportlab.pdfgen import canvas
 import os
 from PIL import Image, ImageDraw, ImageFont
 
-def add_text_to_image(image_path, text, output_path, font_path='font/Quicksand/Quicksand-VariableFont_wght.ttf'):
+def add_text_to_image(image_path, text, output_path, font_path='./Dancing_Script/DancingScript-VariableFont_wght.ttf'):
     image = Image.open(image_path)
     draw = ImageDraw.Draw(image)
-    font_size = 52
+    font_size = 55
     if font_path:
         font = ImageFont.truetype(font_path, font_size)
     else:
@@ -18,18 +18,16 @@ def add_text_to_image(image_path, text, output_path, font_path='font/Quicksand/Q
     print(text)
     # Calculate text size and position
     text_size = font.getbbox(text[0])
-    x, y = 282 + (750-((text_size[2] - text_size[0])/2)), 665
+    x, y = (808-((text_size[2] - text_size[0])/2)), 642
     draw.text((x, y), text[0], fill="black", font=font)
     # print(text[1])
     
     # book name
-    font_size = 45 
-    if font_path:
-        font = ImageFont.truetype(font_path, font_size)
-    else:
-        font = ImageFont.load_default(font_size)
+    font_size = 35
+    
+    font = ImageFont.load_default(font_size)
     text_size = font.getbbox(text[1])
-    x,y=818+(520-((text_size[2]-text_size[0])/2)),762
+    x,y= (1160-((text_size[2]-text_size[0])/2)),753
     # print(x,y)
     # print(text_size)
     draw.text((x, y), text[1], fill="black", font=font)
