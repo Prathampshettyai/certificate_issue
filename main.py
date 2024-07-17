@@ -10,7 +10,7 @@ def main():
 
     file_path = "certificate_issue.xlsx"  # Replace with the path to your XLSX file
     data = fetch_data_from_xlsx(file_path)
-    
+    data1 =[['',1,'pratham p shetty','prathampshetty99sai@gmail.com','SENTIMENTAL REVIEW ANALYSIS ABOUT THE RECENT JAPAN EARTHQUAKE']]
     for i in data:
         # Example of email validation, adjust as needed
         if not i[3] or '@' not in i[3]:
@@ -112,7 +112,8 @@ def main():
         <h1>Conference Participation</h1>
         <p>
           Dear {name},<br><br>
-          We are delighted to inform you that your certificate for presenting a paper at the recent conference is now available! 🌟 Please find the attached PDF certificate for your records.<br><br>
+          We are delighted to inform you that your certificate for presenting a paper at the recent conference is now available! 
+          <br><br>Please find the attached PDF certificate for your records.<br><br>
           Thank you for your participation and valuable contributions. We hope you had a wonderful experience and look forward to seeing you at future events!
         </p>
         <p>
@@ -127,7 +128,7 @@ def main():
 """
 
         try:
-            send_email('prathampshetty99sai@gmail.com', "dlwo fqoz vkvw mwyi", email, subject, body, temp_pdf_path)
+            send_email('@gmail.com', "password", email, subject, body, temp_pdf_path)
         except Exception as e:
             print(f"Failed to send email to {email} : {str(e)}")
             sys.exit(1)

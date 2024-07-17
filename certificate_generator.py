@@ -23,7 +23,7 @@ def add_text_to_image(image_path, text, output_path, font_path='./Dancing_Script
     # print(text[1])
     
     # book name
-    font_size = 35
+    font_size = 30 if len(text[1])>62 else 35
     
     font = ImageFont.load_default(font_size)
     text_size = font.getbbox(text[1])
