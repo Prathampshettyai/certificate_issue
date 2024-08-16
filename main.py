@@ -3,36 +3,42 @@ import sys
 from certificate_generator import add_text_to_image, convert_jpg_to_pdf, send_email
 from excel import fetch_data_from_xlsx
 
+def sanitize_filename(name):
+    return "".join([c if c.isalnum() or c in (' ', '-', '_') else '_' for c in name])
 def main():
     # Ensure the temp directory exists
     if not os.path.exists('./temp'):
         os.makedirs('./temp')
 
+
+
     file_path = "certificate_issue.xlsx"  # Replace with the path to your XLSX file
     data = fetch_data_from_xlsx(file_path)
-    data1 =[['',1,'pratham p shetty','prathampshetty99sai@gmail.com','SENTIMENTAL REVIEW ANALYSIS ABOUT THE RECENT JAPAN EARTHQUAKE']]
-    for i in data:
+    data1 =[['',1,'Mr. SHASHANK','AGE AND GENDER CLASSIFICATION USING DEEP LEARNING','prathampshetty99sai@gmail.com']]
+    for i in data1:
         # Example of email validation, adjust as needed
-        if not i[3] or '@' not in i[3]:
-            print(f"Invalid email address: {i[3]}")
+        if not i[3] or '@' not in i[4]:
+            print(f"Invalid email address: {i[4]}")
             continue
+        sanitized_name = sanitize_filename(i[2])
 
         # Paths for the image and PDF files
-        input_image_path = os.path.join('certificates', 'certificate.jpg')
-        temp_image_path = './temp/certificate.jpg'
-        temp_pdf_path = "./temp/certificate.pdf"
+        input_image_path = os.path.join('certificates', 'certificate1.jpg')
+        temp_image_path = f'./temp/certificate.jpg'
+        temp_pdf_path = f'./temp/{sanitized_name}.pdf'
 
-        add_text_to_image(input_image_path, [i[2], i[4]], temp_image_path)
+        add_text_to_image(input_image_path, [i[2], i[3]], temp_image_path)
         
         if not os.path.exists(temp_image_path):
             print(f"File not found: {temp_image_path}")
             continue
         
         convert_jpg_to_pdf(temp_image_path, temp_pdf_path)
-        
+      
         name = i[2]
-        email = i[3]
+        email = i[4]
         print(email)
+        print(name)
         subject = "🎉 Congratulations! Your Participation Certificate is Ready 🎓"
 
         body = f"""<!DOCTYPE html>
@@ -128,7 +134,8 @@ def main():
 """
 
         try:
-            send_email('@gmail.com', "password", email, subject, body, temp_pdf_path)
+           #send_email('prathampshetty99sai@gmail.com', "dlwo fqoz vkvw mwyi", email, subject, body, temp_pdf_path)
+            send_email('brad@prathampshetty.me ', "Pratham@99sai", email, subject, body, temp_pdf_path)
         except Exception as e:
             print(f"Failed to send email to {email} : {str(e)}")
             sys.exit(1)

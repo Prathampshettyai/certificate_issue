@@ -7,10 +7,10 @@ from reportlab.pdfgen import canvas
 import os
 from PIL import Image, ImageDraw, ImageFont
 
-def add_text_to_image(image_path, text, output_path, font_path='./Dancing_Script/DancingScript-VariableFont_wght.ttf'):
+def add_text_to_image(image_path, text, output_path, font_path='./PTSerif-Regular.ttf'):
     image = Image.open(image_path)
     draw = ImageDraw.Draw(image)
-    font_size = 55
+    font_size = 90
     if font_path:
         font = ImageFont.truetype(font_path, font_size)
     else:
@@ -18,7 +18,7 @@ def add_text_to_image(image_path, text, output_path, font_path='./Dancing_Script
     print(text)
     # Calculate text size and position
     text_size = font.getbbox(text[0])
-    x, y = (808-((text_size[2] - text_size[0])/2)), 642
+    x, y = (808-((text_size[2] - text_size[0])/2)), 600
     draw.text((x, y), text[0], fill="black", font=font)
     # print(text[1])
     
@@ -66,7 +66,7 @@ def send_email(sender_email, sender_password, receiver_email, subject, body, pdf
     text = message.as_string()
 
     try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        with smtplib.SMTP("smtp.mailgun.org", 587) as server:
             server.starttls()
             server.login(sender_email, sender_password)
             server.sendmail(sender_email, receiver_email, text)
